@@ -154,7 +154,7 @@ public class AddTwoNumbers2 {
 			
 			// Advance p and q
 			if(p!= null)
-				p = p.next; // iterator existing linked list's node(not add new node) -> p node = p node's next 
+				p = p.next; 
 			if(q!= null)
 				q = q.next;
 		}
