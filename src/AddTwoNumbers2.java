@@ -121,11 +121,12 @@ public class AddTwoNumbers2 {
 	
 	public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
 		// Initialize current node to dummy head of the returning list.
-		ListNode dummyHead = new ListNode(0); // initialize carry to 0.
+		ListNode dummyHead = new ListNode(0); 
 		
 		// Initial p and q to head of l1 and l2.
 		ListNode p =l1, q =l2, current = dummyHead;		
 		
+		// initialize carry to 0.
 		int carry = 0;
 		
 		// loop through lists l1 and l2 until reach both ends.
