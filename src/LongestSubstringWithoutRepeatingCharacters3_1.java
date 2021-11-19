@@ -1,137 +1,134 @@
 /**
- *  3. Longest substring without repeating characters
- *  
- *  Sol:
- *  
- *  Approach 2:
- *  
- *  Sliding window :
- *  
- *  - the brute force approach is very straightforward.
- *  - But it is too slow.
- *  - We need to optimize it.
+ *  3. Longest Substring without Repeating Characters
  * 
- *  - In the brute force approach , we repeatedly check a substring to see if it has a duplicate character.
- *  - But it is unnecessary.
- *  - If a substring sij from index i to i-1 is already checked to have no duplicate characters.
- *  - we only need to check if s[j] is already in the substring sij.
- *  - to check if a character is already in the substring, we can scan the substring, which leads to an O(n^2) algorithm.
- *  - but we can do better.
- *  
- *  - By using HashSet as a sliding window, checking if a character in the current can be done in O(1).
- *  - A sliding window is an abstract concept commonly used in array/string problem.
- *  - A window is a range of elements in the array/string which usually defined by the start and end indices, 
- *  - i.e.[i,j) (left-closed, right-open).
- *  - A sliding window is a window "slides" its two boundaries to the certain direction.
- *  - for example, if we slide [i,j) to the right by 1 element, then it becomes [i+1,j+1) (left-closed, right-open).
- *  
- *  
- *   - we use HashSet to store the characters in current window [i,j)(j = i initially).
- *   - Then we slide the index j to the right.
- *   - if it is not in the HashSet, we slide j further.
- *   - Doing so until s[j] is already in the HashSet.
- *   - At this point, we found the maximum size of substrings without duplicate characters start with index i.
- *   - if we do this for all i, we get our answer. 
+ * Q:
+ * 
+ * Given a string s, find the length of the longest substring without repeating characters.
+ * 
+ * example 1:
+ * 
+ * - input s = "abcabcbb"
+ * - output: 3
+ * - explanation: The answer is "abc", with the length of 3.
+ * 
+ * Constraint :
+ * 
+ * - 0 <= s.length <=5*10^4
+ * - s = consists of English letters, digits, symbols and spaces.
  * 
  * 
- *  for example:
+ * Solution:
+ * 
+ * Approach 1 : Brute Force (time limit exceeded) 
+ * 
  *  
- *   s = "abcabcbb"
- *   
- *   abc
- *     - we are enumerating the substrings starting from the first character a.
- *     - and we know that the current substring "abc" does not have the repeating characters
- *     
- *   abca  
- *     - then we move forward to the next substring "abca"
- *     - and we know that it has duplicate character "a"
- *     - we need to further enumerating the rest of the substrings starting with the character "a",
- *       but because  "abca" already has duplicate characters
- *     - we do not need to check the rest of the substrings any more.
- *     
- *   bca
- *     - and we can directly move forward to enumerate the substring starting from the second character "b"
- *     - and because previously when enumerating the substrings starting from the first character "a"
- *     - we have already checked the "b" and "bc" parts and we know that they did not have duplicate characters.
- *     - so we do not need to check there parts again and we can directly check the substring "bca"
- *       
- *     - and if it has duplicate characters
- *     - we do not need to further check the rest of the substrings starting with "b"
- *     - and we can just begin to enumerate the substring starting with the third character
- *     
- *    bcab   
- *     - in this case , the substring "bca" does not have the duplicate characters
- *     - so we can further check the next substring start with "b" so on and so forth.
- *       
+ * Intuition :
+ * 
+ *  - check all the substring one by one to see if it has no duplicate character.
+ *  
  *
+ * Algorithm:
+ * 
+ * 
+ * -for example:
+ * 
+ *    s = "abcabcbb"
+ *    
+ *    abca
+ *    
+ *    - we can start from the character "a"
+ *      and we forward to check all the substrings starting from it.
+ *    - then we move forward to the second character.
+ *    
+ *    bca
+ *    
+ *    - and enumerate all the substrings starting from this character "b"
+ *      
+ *    cabcbb
+ *    
+ *    - after this, we can move forward to next character "c"
+ *      and keep enumerating the substrings, so on and so forth.
+ *      
+ *      
+ * 
+ * - Suppose we have a function boolean allUnique(String substring) which will return true if the characters in the substring are all unique, otherwise false.
+ * - we can iterate through all the possible substrings of the given string s and call the function allUnique.
+ * - If it turns out to be true, then we update our answer of the maximum length of substring without duplicate characters.
+ * 
+ *  1. enumerating method:
+ * 
+ *   - To enumerate all substrings of a given string, we enumerate the start and end indices of them.
+ *   - Suppose the start and end indices are i and j.
+ *   - Then we have 0<= i <= j <= n (here end index j is exclusive by convention).
+ *   - Thus, using 2 nested loops with i from 0 to n-1 and j from i+1 to n, we can enumerate all the substrings of s.
+ *  
+ *  2. check Repetition method :   
+ *   - To check if one string has duplicate characters, we can use a set.
+ *   - we iterate through all the characters in the string and put then into the set one by one.
+ *   - Before putting one character, we check of the set already contains it.
+ *   - If so, we return false.
+ *   - After the loop, we return true.       
+ * 
+ * - Direct access/ addressing table:
+ *  - maps records with their corresponding unique keys using Arrays.
+ *  - the key of records are used directly as indexes. 
+ * 
+ * 
  */
 public class LongestSubstringWithoutRepeatingCharacters3_1 {
 	
 	public int lengthOfLongestSubstring(String s) {
-		// declare a direct access table to record how many times each character appears in the sliding window.
-		// so we declare the table as an int array.
-		// and all the characters can be encoded into integers.
-		// The size of the table is set to 128
-		// which can cover all the possible characters
-		int[] chars = new int [128];
+		// s consists of English letters, digits, symbols and spaces.
+		int n = s.length();
 		
-		// we use a left pointer to contract the window
-		int left = 0;
-		// and a right pointer to extend the window
-		// and initially, these pointer are all set to 0.
-		int right = 0;
+		int result= 0; // number of the word
 		
-		// we use a variable to check our final result.
-		int res = 0;
-		
-		// Sliding window:
-		// if the right boundary does not reach s.length, we can keep extending the window.
-		while (right <s.length()) {
-			
-			// we firstly obtain the character at the right boundary.
-			char r = s.charAt(right);
-			// and we can add one more time for this character's occurrence.
-			chars[r]++;
-			
-			// contracting the window :
-			// if the character at the right boundary appears more than once,
-			// we need to keep contracting the window.
-			while (chars[r]>1) {
+		//  use nested for loop to Enumerate all the substrings
+		for (int i = 0; i < n; i++) {
+			for (int j =i ; j < n ; j++) {
 				
-				// To contracting the window, we should get the character at the left boundary.
-				// and to reduce it's occurrence.				
-				char l = s.charAt(left);
-				chars[l]--;
-				
-				// Then move forward the left pointer.
-				left++;
+				// Check the substring and update the result
+				if (checkRepition(s, i, j))
+					result = Math.max(result,j - i + 1);
 			}
-			
-			// After contracting the window, we can make sure that there is no duplicate character in the current window.
-			// so we can update our result using the current window's length
-			res = Math.max(res, right - left + 1);
-			
-			// At last, we can keep extending the window.
-			right++; 
 		}
-		return res;
+		return result;
+	}
+	
+	private boolean checkRepition(String s, int start, int end) {
+		// Declare a direct access table to record the occurrence of each character.
+		int [] chars = new int [128];
+		
+		// all the characters can be mapped to an integer index.
+	    // for example : the capital letter A is mapped to 65.
+		for (int i = start; i <= end ; i++) {
+			char c = s.charAt(i);
+			chars[c]++;
+			if(chars[c]>1) { 
+				return false;
+			}
+		}
+			
+		return true;
+		}
 	}
 
-}
 
 /**
- * Complexity Analysis :
+ * Time complexity:
  * 
- * - Time complexity :
- *  - O(2n) = O(n).
- *  - In the worst case each character will be visited twice by i and j.
- *  
- * - Space complexity:
- *  - O(min(m,n))
- *  - Same as the previous approach.
- *  - we need O(k) space for the sliding window, where k is the size of the Set.
- *  - The size of the Set is upper bounded by the size of tge string n and the size of the charset/alphabet m. 
+ * - nested for loop : O(n^2)
+ * - checkRepition method : O(n)
  * 
+ * -> O(n^3) -> time limit exceeded
+ *   - n is the length of the input string
+ *   
+ * Space complexity :
  * 
+ * - we use a direct access table to check the substrings.
  * 
+ * -> O(m) 
+ *   - where m is the size of the table, which depends on the size of the porblem's charset. 
+ *
  */
+
