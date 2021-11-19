@@ -2,6 +2,7 @@
  *  3. Longest Substring without Repeating Characters
  * 
  * Q:
+ * 
  * Given a string s, find the length of the longest substring without repeating characters.
  * 
  * example 1:
@@ -43,7 +44,7 @@
  *    
  *    - and enumerate all the substrings starting from this character "b"
  *      
- *    ca
+ *    cabcbb
  *    
  *    - after this, we can move forward to next character "c"
  *      and keep enumerating the substrings, so on and so forth.
@@ -80,7 +81,7 @@ public class LongestSubstringWithoutRepeatingCharacters3 {
 		// s consists of English letters, digits, symbols and spaces.
 		int n = s.length();
 		
-		int result= 0;
+		int result= 0; // number of the word
 		
 		//  use nested for loop to Enumerate all the substrings
 		for (int i = 0; i < n; i++) {
