@@ -5,7 +5,7 @@
  *  
  *  Approach 2:
  *  
- *  Sliding window :
+ *  Sliding window :(Use HashSet)
  *  
  *  - the brute force approach is very straightforward.
  *  - But it is too slow.
@@ -96,12 +96,12 @@ public class LongestSubstringWithoutRepeatingCharacters3_2 {
 			// contracting the window :
 			// if the character at the right boundary appears more than once,
 			// we need to keep contracting the window.
-			while (chars[r]>1) {
+			while (chars[r]>1) { // occurrence = 2 , ex: abca -> a occurrence is 2 
 				
 				// To contracting the window, we should get the character at the left boundary.
 				// and to reduce it's occurrence.				
 				char l = s.charAt(left);
-				chars[l]--;
+				chars[l]--; // ex: reduce the a occurrence -> a occurrence will be 1
 				
 				// Then move forward the left pointer.
 				left++;
@@ -130,6 +130,6 @@ public class LongestSubstringWithoutRepeatingCharacters3_2 {
  *  - O(min(m,n))
  *  - Same as the previous approach.
  *  - we need O(k) space for the sliding window, where k is the size of the Set.
- *  - The size of the Set is upper bounded by the size of tge string n and the size of the charset/alphabet m.  
+ *  - The size of the Set is upper bounded by the size of the string n and the size of the charset/alphabet m.  
  * 
  */
