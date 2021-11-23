@@ -206,14 +206,19 @@ public class DecodeWays91 {
 			return 0;
 		}
 		
-		//if we are at the last value of the array which is the length-1
+		//if we are at the last value of the array which is the length-1, so we don't need to worry about going out of the bounds.
 		if (index == str.length()-1) {
 			return 1;
 		}
 		
+		// Recursive part:
+		// create a variable call answer
 		int ans = recursiveWithMemo(index+1 , str);
+		
+		// If we can use two letters as a decoding, we can use Integer.parseInt to 
+		// take the substring from index we are currently looking at to 2 indices ahead. It's an exclusive range.
 		if(Integer.parseInt(str.substring(index, index+2)) <= 26) {
-			ans += recursiveWithMemo(index+2, str);
+			ans += recursiveWithMemo(index+2, str); // We have 2 digits encoding to use, so we can add the recursion to call the answer
 		}
 		
 		// Save for memoization
