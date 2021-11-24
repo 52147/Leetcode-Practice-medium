@@ -1,3 +1,4 @@
+import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -172,14 +173,11 @@ import java.util.Map;
  *  - 5. If the result is already in memo we return the result.
  *       Otherwise the number of ways for the given string is determined by making a recursive
  *       call to the function with index + 1 for next substring string and index + 2 after checking for valid 2-digit decode.
- *       The result is always stored in memo with key as current index, for saving for future overlapping subproblems.      
- *       
- *       
- *     
+ *       The result is always stored in memo with key as current index, for saving for future overlapping subproblems.  
  * 
  *
  */
-public class DecodeWays91 {
+public class DecodeWays91_1 {
 	
 	// Use HashMap to solve the overlapping problem.
 	Map<Integer, Integer> memo = new HashMap<>();
