@@ -1,4 +1,5 @@
 import java.util.Map;
+import java.util.HashMap;
 
 /**
  * Approach 3: Sliding window optimized (using HashMap)
@@ -56,7 +57,7 @@ public class LongestSubstringWithtoutRepeatingCharacter_3 {
  * 
  * - Space complexity(HashMap):
  *   - O(min(m,n))
- *   - We need O(k)O(k) space for checking a substring has no duplicate characters, 
+ *   - We need O(k) space for checking a substring has no duplicate characters, 
  *   - where k is the size of the Set. 
  *   - The size of the Set is upper bounded by the size of the string n and the size of the charset/alphabet m.
  *   - (same as the previous approach)

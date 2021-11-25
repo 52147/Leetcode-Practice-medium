@@ -86,7 +86,7 @@
  *     ListNode{
  *     
  *     }
- *     ListNOde(int val){
+ *     ListNode(int val){
  *     this.val = val;}
  *     ListNode(int val, ListNode next){
  *     this.val = val;
@@ -95,6 +95,21 @@
  * }
  *
  */
+class ListNode{
+  	   int val;
+      ListNode next;
+      ListNode(){
+      
+      }
+      ListNode(int val){
+      this.val = val;}
+     ListNode(int val, ListNode next){
+      this.val = val;
+      this.next = next;
+      }
+  }
+
+
 public class AddTwoNumbers2 {
 	
 /**
@@ -118,6 +133,9 @@ public class AddTwoNumbers2 {
  *  
  *  dummyHead -> 7 -> 0 -> 8 -> null
 */
+	
+	
+	
 	
 	public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
 		// Initialize current node to dummy head of the returning list.
