@@ -111,7 +111,7 @@ import java.util.HashMap;
  *        - As stated in the first option, there are (k-1)*totalWays(i-1) ways to paint the i-th post a difference color than the (i-1)-th post,
  *          so that means there are 1*(k-1)*totalWays(i-2) ways to paint the (i-1)-th post a different color than the (i-2)-th post.
  *          
- *     - Adding these 2 senarios together gives totalWays(i) = (k-1)*totalWays + (k-1)*totalWays(i-2), which can be simplified to:
+ *     - Adding these 2 senarios together gives totalWays(i) = (k-1)*totalWays(i-1) + (k-1)*totalWays(i-2), which can be simplified to:
  *       
  *       -> totalWays(i) = (k-1) * (totalWays(i-1) + totalWays(i-2))
  *       
@@ -163,12 +163,12 @@ import java.util.HashMap;
  *   
  *   - 3. 
  *     - In the function totalWays, first check for the base cases.
- *     - return k if i==1, and return k*k if i == 2.
+ *     - return k if i == 1, and return k*k if i == 2.
  *     - Next, check if the argument i has already been calculated and stored in memo.
  *     - If so, return memo[i].
  *     - Otherwise, use recurrence relation to calculate memo[i], and then return memo[i].    
  *        
- *    - 4. Simply call and return totalWays(n).            
+ *   - 4. Simply call and return totalWays(n).            
  *               
  *          
  */
@@ -178,6 +178,7 @@ public class PaintFence276_1 {
 	
 	private int totalWays(int i, int k) {
 		
+		// Base cases:
 		if(i == 1) return k; // 1 post has the k ways to paint
 		if(i == 2) return k*k; // 2 posts have the k*k ways to paint 
 		
