@@ -117,11 +117,11 @@ import java.util.Map;
  * 
  *
  */
-public class LRUCache146 extends LinkedHashMap<Integer, Integer>{
+public class LRUCache146_1 extends LinkedHashMap<Integer, Integer>{
 	
 	private int capacity;
 	
-	public LRUCache146(int capacity) {
+	public LRUCache146_1(int capacity) {
 		super(capacity, 0.75F, true); 
 		// Map implementations in Java have default load factor of 0.75 
 		// which means that they rehash whole map when size > 0.75*capacity.
