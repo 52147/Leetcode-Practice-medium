@@ -140,3 +140,20 @@ public class LRUCache146_2 {
 		}
 	}
 }
+
+/**
+ * Complexity Analysis:
+ *  - Time complexity:
+ *    - O(1)
+ *    - both for put and get
+ *    
+ *  - Space complexity:
+ *    - O(capacity)
+ *    - since the space is used only for a hashmap and double linked list with ar most capacity + 1 elements.    
+ * 
+ */
+
+
+
+
+
