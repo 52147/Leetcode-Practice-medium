@@ -166,7 +166,7 @@
  * 
  * 
  */
-public class DesignCircilarQueue622_1a {
+public class DesignCircularQueue622_1a {
 	
 	private int[] queue;
 	private int headIndex;
@@ -177,7 +177,7 @@ public class DesignCircilarQueue622_1a {
 	 * Initialize your data structure here.
 	 * Set the size of the queue to be k.
 	 */
-	public DesignCircilarQueue622_1a(int k) {
+	public DesignCircularQueue622_1a(int k) {
 		this.capacity = k;
 		this.queue = new int[k];
 		this.headIndex = 0;
