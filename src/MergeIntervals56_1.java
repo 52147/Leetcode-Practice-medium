@@ -33,7 +33,8 @@
  *       
  *     Algorithm:
  *     
- *     - With the above intuition in mind, we can represent the graph   
+ *     - With the above intuition in mind, we can represent the graph as an adjacency list,
+ *     inserting directed edges in both directions to simulate undirected edges.
  *       
  *     
  *    
