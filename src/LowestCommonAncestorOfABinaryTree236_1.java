@@ -133,12 +133,12 @@ class TreeNode{
 	}
 	
 }
-public class LowestCommonAncestorOfABinaryTree236 {
+public class LowestCommonAncestorOfABinaryTree236_1 {
 	
 	
 	private TreeNode ans;
 	
-	public LowestCommonAncestorOfABinaryTree236() {
+	public LowestCommonAncestorOfABinaryTree236_1() {
 		// variable to store LCA node.
 		this.ans = null;
 	}
