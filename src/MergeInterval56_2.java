@@ -4,6 +4,8 @@ import java.util.LinkedList;
 /**
  * 
  * Approach 2: Sorting
+ * 
+ * 
  * Intuition:
  * 
  * - If we sort the intervals by their start value, 
@@ -69,14 +71,14 @@ public class MergeInterval56_2 {
 		// 2. create a linked list to add the merged interval in.
 		LinkedList<int[]> merged = new LinkedList<>();
 		
-		// 3. iterate through all of the intervals in the intervals arrays.
+		// 3. iterate through all of the intervals in the intervals arrays.(sorted arrays)
 		// for loop -> O(N)
 		for(int[] interval: intervals) {
 			// if the linked list is empty or the last item its ending position is before where i start at
 			if(merged.isEmpty() || merged.getLast()[1] < interval[0]) {
 				merged.add(interval);
 			}else { // overlap
-				merged.getLast()[1] = Math.max(merged.getLast()[1], interval[1]);
+				merged.getLast()[1] = Math.max(merged.getLast()[1], interval[1]); // update the end point
 			}
 		}
 		
